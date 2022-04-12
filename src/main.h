@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdint.h>
+#include <ticks_systick.h>
 void setup(void);
 void loop(void);
-uint32_t SysTick_getTicks(void);
 #endif

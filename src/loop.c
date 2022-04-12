@@ -7,6 +7,7 @@
  */
 #include <main.h>
 #include <stm32f1xx.h>
+#include <ticks_systick.h>
 
 typedef enum EstadoLed{ENCENDIDO,APAGADO}EstadoLed;
 
@@ -18,13 +19,6 @@ inline static void estadoLed(EstadoLed estado)
         GPIOC->BSRR |= GPIO_BSRR_BS13;
 }
 
-
-inline static void esperaMilisegundos(uint32_t tiempo)
-{
-    if (tiempo == 0) tiempo = 1;
-    uint32_t final = tiempo + SysTick_getTicks();
-    while (SysTick_getTicks() != final);
-}
 
 
 inline static EstadoLed nuevoEstado(EstadoLed estadoActual)
@@ -41,6 +35,6 @@ void loop(void)
 {
     static EstadoLed estado = ENCENDIDO;
     estadoLed(estado);
-    esperaMilisegundos(500);
+    Ticks_esperaMilisegundos(500);
     estado = nuevoEstado(estado);
 }

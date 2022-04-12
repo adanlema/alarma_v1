@@ -6,6 +6,7 @@
  *      - Interrupción SysTick cada 1ms
  */
 #include <main.h>
+#include <ticks_systick.h>
 #include <stm32f1xx.h>
 
 inline static void conectaRelojPuertoC(void)
@@ -19,17 +20,10 @@ inline static void configuraPin13PuertoC_SalidaPushPull_2MHz_inicial_1(void)
     GPIOC->CRH = (GPIOC->CRH & ~(GPIO_CRH_MODE13|GPIO_CRH_CNF13))|(GPIO_CRH_MODE13_1);
 }
 
-inline static void configuraSysTick_1ms(void)
-{
-    SystemCoreClockUpdate();
-    const uint32_t ciclosPorMilisegundo = SystemCoreClock/1000;
-    const uint32_t falla = SysTick_Config(ciclosPorMilisegundo);
-    while(falla)asm volatile("nop");
-}
-
 void setup(void)
 {
     conectaRelojPuertoC();
     configuraPin13PuertoC_SalidaPushPull_2MHz_inicial_1();
-    configuraSysTick_1ms();
+    if (Ticks_configura_1ms() != TICKS_OK)
+        for(;;); //HALT
 }
