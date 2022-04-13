@@ -3,11 +3,11 @@
  * @author Fernando A. Miranda Bonomi (fmirandabonomi@herrera.unt.edu.ar)
  * @brief Implementación simple de ISR de SysTick generando un contador de milisegundos.
  */
-#include <ticks_systick.h>
+#include <timer_systick.h>
 
 static volatile uint32_t ticks;
 
-uint32_t Ticks_getTicks(void)
+uint32_t TimerSysTick_getMilisegundos(void)
 {
     return ticks;
 }

@@ -1,6 +1,6 @@
 #include <ejemplo.h>
 #include <unity.h>
-#include <ticks_systick.h>
+#include <timer_systick.h>
 #include <ejemplo.h>
 
 static void suma_dos_numeros_34(void)
@@ -15,8 +15,8 @@ static void suma_dos_numeros_16(void)
 
 int main(void)
 {
-    Ticks_configura_1ms();
-    Ticks_esperaMilisegundos(500);
+    TimerSysTick_init();
+    TimerSysTick_esperaMilisegundos(500);
     UNITY_BEGIN();
     RUN_TEST(suma_dos_numeros_34);
     RUN_TEST(suma_dos_numeros_16);

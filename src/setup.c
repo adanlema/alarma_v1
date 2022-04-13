@@ -6,7 +6,7 @@
  *      - Interrupción SysTick cada 1ms
  */
 #include <main.h>
-#include <ticks_systick.h>
+#include <timer_systick.h>
 #include <stm32f1xx.h>
 
 inline static void conectaRelojPuertoC(void)
@@ -24,6 +24,5 @@ void setup(void)
 {
     conectaRelojPuertoC();
     configuraPin13PuertoC_SalidaPushPull_2MHz_inicial_1();
-    if (Ticks_configura_1ms() != TICKS_OK)
-        for(;;); //HALT
+    TimerSysTick_init();
 }

@@ -7,7 +7,7 @@
  */
 #include <main.h>
 #include <stm32f1xx.h>
-#include <ticks_systick.h>
+#include <timer_systick.h>
 
 typedef enum EstadoLed{ENCENDIDO,APAGADO}EstadoLed;
 
@@ -35,6 +35,6 @@ void loop(void)
 {
     static EstadoLed estado = ENCENDIDO;
     estadoLed(estado);
-    Ticks_esperaMilisegundos(500);
+    TimerSysTick_esperaMilisegundos(500);
     estado = nuevoEstado(estado);
 }
