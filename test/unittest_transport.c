@@ -10,6 +10,8 @@
 
 #define USART_BRR_FIXP_FACTOR 16UL
 #define USART_BRR_OVERSAMPLE 16UL
+
+
 void unittest_uart_begin(void)
 {
     RCC->APB2ENR |= RCC_APB2ENR_AFIOEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN;
@@ -17,7 +19,7 @@ void unittest_uart_begin(void)
                  | (PIN_CNF_AFO_PP << GPIO_CRH_CNF9_Pos)
                  | (PIN_MOD_LS << GPIO_CRH_MODE9_Pos);
     SystemCoreClockUpdate();
-    USART1->CR1 |= USART_CR1_UE | USART_CR1_M;
+    USART1->CR1 |= USART_CR1_UE;
     USART1->CR2 = (USART1->CR2 & ~(USART_CR2_STOP)) | (USART_STOP_1 << USART_CR2_STOP_Pos) ;
     USART1->BRR = (SystemCoreClock*USART_BRR_FIXP_FACTOR) / (115200*USART_BRR_OVERSAMPLE);
     USART1->CR1 |= USART_CR1_TE;
