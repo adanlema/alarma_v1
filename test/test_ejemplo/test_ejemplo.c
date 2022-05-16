@@ -3,6 +3,9 @@
 #include <timer_systick.h>
 #include <ejemplo.h>
 
+void setUp(void){}
+void tearDown(void){}
+
 static void suma_dos_numeros_34(void)
 {    
     TEST_ASSERT_EQUAL_INT32(34,Ejemplo_suma(10,24));

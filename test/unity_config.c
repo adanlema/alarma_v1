@@ -1,4 +1,4 @@
-#include "unittest_transport.h"
+#include "unity_config.h"
 #include <stm32f1xx.h>
 
 
@@ -12,7 +12,7 @@
 #define USART_BRR_OVERSAMPLE 16UL
 
 
-void unittest_uart_begin(void)
+void unityOutputStart(void)
 {
     RCC->APB2ENR |= RCC_APB2ENR_AFIOEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_USART1EN;
     GPIOA->CRH = (GPIOA->CRH & ~(GPIO_CRH_CNF9 | GPIO_CRH_MODE9)) 
@@ -25,18 +25,18 @@ void unittest_uart_begin(void)
     USART1->CR1 |= USART_CR1_TE;
 }
 
-void unittest_uart_putchar(char c)
+void unityOutputChar(char c)
 {
     while (!(USART1->SR & USART_SR_TXE));
     USART1->DR = c&0xFF;
 }
-void unittest_uart_flush(void)
+void unityOutputFlush(void)
 {
     while (!(USART1->SR & USART_SR_TC));
 }
-void unittest_uart_end(void)
+void unityOutputComplete(void)
 {
-    unittest_uart_flush();
+    unityOutputFlush();
     USART1->CR1 &= ~(USART_CR1_UE);
     GPIOA->CRH = (GPIOA->CRH & ~(GPIO_CRH_CNF9 | GPIO_CRH_MODE9)) 
                  | (PIN_CNF_AN << GPIO_CRH_CNF9_Pos)
