@@ -5,9 +5,20 @@
  */
 #include <main.h>
 
+
+void iniciar_alarma(Alarma *self, EstadoAlarma estadoInicial)
+{
+    printf("Iniciliazando alarma...\n");
+    self->estado = estadoInicial;
+}
+
+
 int main(void)
 {
+    EstadoAlarma AL;
+
     setup();
-    for(;;)loop();
+    iniciar_alarma(&AL,DESARMADA);
+    for(;;)loop(&AL);
     return 0;
 }
