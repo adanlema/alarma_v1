@@ -25,9 +25,9 @@ typedef struct Alarma {
 
 
 void iniciar_alarma(Alarma *self, EstadoAlarma estadoInicial);
-void setup(void);
+void setup(Alarma *self);
 void loop(Alarma *self);
-
+void control_alarma();
 
 
 

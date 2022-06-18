@@ -1,28 +1,23 @@
 /**
- * @file setup.c
- * @author Fernando A. Miranda Bonomi (fmirandabonomi@herrera.unt.edu.ar)
+ * @file main.c
+ * @author Adan J.A. Lema (adanlema@hotmail.com)
  * @brief Configuración básica: 
- *      - Pin 13 del puerto C (led del bluepill) como salida 2MHz PushPull
+ *      - Inicilizar la alarma
+ *      - Configurar los puertos
  *      - Interrupción SysTick cada 1ms
  */
 #include <main.h>
 #include <timer_systick.h>
 #include <stm32f1xx.h>
 
-inline static void conectaRelojPuertoC(void)
+void iniciar_alarma(Alarma *self, EstadoAlarma estadoInicial)
 {
-    RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
+    printf("Iniciliazando alarma...\n");
+    self->estado = estadoInicial;
 }
 
-inline static void configuraPin13PuertoC_SalidaPushPull_2MHz_inicial_1(void)
+void setup(Alarma *self)
 {
-    GPIOC->BSRR |= GPIO_BSRR_BS13;
-    GPIOC->CRH = (GPIOC->CRH & ~(GPIO_CRH_MODE13|GPIO_CRH_CNF13))|(GPIO_CRH_MODE13_1);
-}
-
-void setup(void)
-{
-    conectaRelojPuertoC();
-    configuraPin13PuertoC_SalidaPushPull_2MHz_inicial_1();
+    iniciar_alarma(&self,DESARMADA);
     TimerSysTick_init();
 }
