@@ -7,8 +7,8 @@
 
 int main(void)
 {
-    EstadoAlarma AL;
+    Alarma AL;
     setup(&AL);
-    for(;;)loop(&AL);
+    loop(&AL);
     return 0;
 }

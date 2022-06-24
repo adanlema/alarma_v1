@@ -10,14 +10,7 @@
 #include <timer_systick.h>
 #include <stm32f1xx.h>
 
-void iniciar_alarma(Alarma *self, EstadoAlarma estadoInicial)
+void setup(void)
 {
-    printf("Iniciliazando alarma...\n");
-    self->estado = estadoInicial;
-}
-
-void setup(Alarma *self)
-{
-    iniciar_alarma(&self,DESARMADA);
     TimerSysTick_init();
 }
